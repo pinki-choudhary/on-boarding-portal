@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
 export class PortalHeaderComponent implements OnInit {
 
   isLoggedIn = false;
+  username = '';
   constructor(private route: Router) { }
 
   ngOnInit() {
     if (localStorage.getItem('TOKEN') !== null) {
+      this.username = 'Log out ' + localStorage.getItem('username');
       this.isLoggedIn = true;
     }
   }

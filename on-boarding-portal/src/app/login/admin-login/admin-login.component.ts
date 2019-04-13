@@ -33,6 +33,7 @@ export class AdminLoginComponent implements OnInit {
   login(myform: IUser) {
     if (this.loginService.validateUser(myform)) {
       localStorage.setItem('TOKEN', 'token');
+      localStorage.setItem('username', myform.username);
       this.route.navigate(['/dashboard']);
     } else {
       alert('Enter valid credentials');
