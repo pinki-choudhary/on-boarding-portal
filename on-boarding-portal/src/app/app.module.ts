@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 
 import { NgModule } from '@angular/core';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './core/approuting/approuting.module';
-import { CustomMaterialModule } from './shared/custom-material/custom-material.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,6 @@ import { CustomMaterialModule } from './shared/custom-material/custom-material.m
   ],
   imports: [
     BrowserModule,
-    CustomMaterialModule,
     AppRoutingModule
   ],
   providers: [],
