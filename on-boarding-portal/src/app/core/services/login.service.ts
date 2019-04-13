@@ -22,7 +22,7 @@ export class LoginService {
 
   validateUser(user: IUser): boolean {
     let validUser = false;
-    if (this.loginData.findIndex(usr => user.username === usr.username) > -1) {
+    if (this.loginData.findIndex(usr => user.username.toLowerCase() === usr.username.toLowerCase()) > -1) {
       validUser = true;
     }
     return validUser;
