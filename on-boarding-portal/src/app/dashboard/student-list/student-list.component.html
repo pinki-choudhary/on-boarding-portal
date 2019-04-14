@@ -1,3 +1,23 @@
-<p>
-  student-list works!
-</p>
+<mat-grid-list cols="3" rowHeight="3:3">
+  <mat-grid-tile *ngFor="let student of students">
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{student.name}}</mat-card-title>
+            <mat-card-subtitle>{{student.type}} Student</mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>Father's Name: {{student.father_name}}</p>
+        <p>Mother's Name: {{student.mother_name}}</p>
+        <p>Date of Birth: {{student.dob | date:'fullDate'}}</p>
+        <p>Last Class Marks: {{student.last_class_score}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent">Edit</button>
+        <button mat-raised-button color="accent">View</button>
+        <button mat-raised-button color="accent">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

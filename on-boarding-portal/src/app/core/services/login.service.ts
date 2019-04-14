@@ -10,7 +10,7 @@ export class LoginService {
 
   private loginData: IUser[];
 
-  private loginUrl = 'api/login';  // URL to web api
+  private loginUrl = 'api/login';
 
   constructor(private http: HttpClient) {
     this.getUsers().subscribe(data => this.loginData = data);
