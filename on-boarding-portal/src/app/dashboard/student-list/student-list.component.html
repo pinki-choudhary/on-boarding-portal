@@ -1,7 +1,9 @@
 <mat-grid-list cols="4" rowHeight="4:4">
   <mat-grid-tile *ngFor="let student of students">
-    <mat-card>
-        <mat-card-header>
+    <mat-card [appIdentifyStudentType] = student.type>
+      
+        <div style="text-align: right"><button mat-button (click)="delete(student.id)"><mat-icon>delete_forever</mat-icon></button></div>
+        <mat-card-header [appIdentifyStudentType] = student.type>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{student.name}}</mat-card-title>
             <mat-card-subtitle>{{student.type}} Student</mat-card-subtitle>
@@ -14,9 +16,8 @@
         <p>Last Class Marks: {{student.last_class_score}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent">Edit</button>
-        <button mat-raised-button color="accent" >View</button>
-        <button mat-raised-button color="accent">Delete</button>
+        <button mat-raised-button color="primary" [routerLink] = "['/dashboard/onboard',student.id]">Edit</button>
+        <button mat-raised-button color="primary" [routerLink] = "['/dashboard/onboard',student.id]">View</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

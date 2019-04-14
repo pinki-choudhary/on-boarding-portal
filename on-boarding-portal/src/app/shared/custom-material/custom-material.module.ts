@@ -7,9 +7,12 @@ import {MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule, MatI
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IdentifyStudentTypeDirective } from './identify-student-type.directive';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    IdentifyStudentTypeDirective],
   imports: [
     CommonModule,
     BrowserModule,
@@ -53,7 +56,8 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
     MatGridListModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    IdentifyStudentTypeDirective
   ]
 })
 export class CustomMaterialModule { }

@@ -3,8 +3,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-card { text-align: -webkit-center; }    
+.mat-card, .mat-card-actions { text-align: -webkit-center; }    
 .mat-tab-label { color: #ff4081; } 
 mat-card { max-width: 80%; margin: 2em auto; text-align: center; } 
 mat-toolbar-row { justify-content: space-between; }
 mat-raised-button { outline: none !important }   
+button:focus{outline: none; border:0;}
