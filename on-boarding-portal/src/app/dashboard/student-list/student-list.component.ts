@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentOnboardService } from '../../core/services/student-onboard.service';
+import { IStudent } from 'src/app/shared/interfaces/IStudent';
 
 @Component({
   selector: 'app-student-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentListComponent implements OnInit {
 
-  constructor() { }
+  students: IStudent[];
+  constructor(private studentOnboardService: StudentOnboardService) { }
 
   ngOnInit() {
+    this.listAllStudents();
+  }
+
+  listAllStudents() {
+    this.studentOnboardService.getStudents().subscribe(data => this.students = data);
   }
 
 }
