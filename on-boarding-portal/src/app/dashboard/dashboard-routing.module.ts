@@ -7,7 +7,8 @@ import { CustomMaterialModule} from '../shared/custom-material/custom-material.m
 import { OnBoardFormComponent } from '../dashboard/on-board-form/on-board-form.component';
 import { StudentListComponent } from '../dashboard/student-list/student-list.component';
 
-const dashboardRoutes: Routes = [
+export const dashboardRoutes: Routes = [
+  {path: '', redirectTo: 'onboard', pathMatch: 'full'},
   {path: 'onboard', component: OnBoardFormComponent},
   {path: 'studentlist', component: StudentListComponent}
 ];
@@ -16,7 +17,7 @@ const dashboardRoutes: Routes = [
   declarations: [OnBoardFormComponent, StudentListComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(dashboardRoutes),
+    RouterModule,
     CustomMaterialModule
   ],
   exports: [

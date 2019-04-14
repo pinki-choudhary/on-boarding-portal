@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   navLinks: any[];
-  activeLinkIndex = -1;
   constructor(private router: Router) {
     this.navLinks = [
         {
@@ -20,7 +19,8 @@ export class DashboardComponent implements OnInit {
             index: 1
         }
     ];
-}  ngOnInit() {
+}
+ngOnInit() {
   }
 
 }

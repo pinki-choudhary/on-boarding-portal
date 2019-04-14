@@ -13,6 +13,7 @@ export class StudentListComponent implements OnInit {
   constructor(private studentOnboardService: StudentOnboardService) { }
 
   ngOnInit() {
+    console.log('stu');
     this.listAllStudents();
   }
 

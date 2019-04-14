@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { dashboardRoutes } from '../../dashboard/dashboard-routing.module';
 import { LoginModule } from '../../login/login.module';
 import { DashboardModule } from '../../dashboard/dashboard.module';
 import { PageNotFoundModule } from '../../shared/pagenotfound/pagenotfound.module';
@@ -13,9 +14,9 @@ import { PageNotFoundComponent } from '../../shared/pagenotfound/page-not-found/
 
 
 const routes: Routes = [
-  {path: 'login', component: AdminLoginComponent},
-  {path: 'dashboard', component: DashboardComponent},
   {path: '', component: AdminLoginComponent, pathMatch: 'full'},
+  {path: 'login', component: AdminLoginComponent},
+  {path: 'dashboard', component: DashboardComponent, children: [...dashboardRoutes]},
   {path: '**', component: PageNotFoundComponent, pathMatch: 'full'}
 ];
 
