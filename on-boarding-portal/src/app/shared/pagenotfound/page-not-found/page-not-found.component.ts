@@ -14,7 +14,7 @@ export class PageNotFoundComponent implements OnInit {
   }
 
   goBack(): void {
-    if (localStorage.getItem('token') !== null) {
+    if (localStorage.getItem('TOKEN') !== null) {
       this.route.navigate(['/dashboard']);
     } else {
       this.route.navigate(['/login']);

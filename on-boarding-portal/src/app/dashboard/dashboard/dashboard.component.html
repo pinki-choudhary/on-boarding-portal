@@ -1,21 +1,21 @@
 <app-portal-header></app-portal-header>
 
-<mat-tab-group>
+<!-- <mat-tab-group>
 	<mat-tab label = "On Board Student"> 
 		<mat-card><app-on-board-form></app-on-board-form></mat-card>
 	</mat-tab>
 	<mat-tab label = "Students List"> 
 		<mat-card><app-student-list></app-student-list></mat-card>
 	</mat-tab>
-</mat-tab-group>
-<!-- 
+</mat-tab-group> -->
 <nav mat-tab-nav-bar>
 		<a mat-tab-link
 		*ngFor="let link of navLinks"
 		[routerLink]="link.link"
 		routerLinkActive #rla="routerLinkActive"
 		[active]="rla.isActive">
-		
+		{{link.label}}
 		</a>
 		</nav>
-		<router-outlet></router-outlet> -->
+		<router-outlet></router-outlet>
+		
