@@ -10,6 +10,8 @@ export class OnBoardFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('onb');
+
   }
 
 }

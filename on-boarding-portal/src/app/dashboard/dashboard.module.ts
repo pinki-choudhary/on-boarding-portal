@@ -10,8 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    LoginModule,
     DashBoardRoutingModule,
-    LoginModule
   ],
   exports: [
     DashboardComponent,
