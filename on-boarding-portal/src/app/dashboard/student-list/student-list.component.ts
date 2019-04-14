@@ -10,6 +10,7 @@ import { IStudent } from 'src/app/shared/interfaces/IStudent';
 export class StudentListComponent implements OnInit {
 
   students: IStudent[];
+  directiveColor = '';
   constructor(private studentOnboardService: StudentOnboardService) { }
 
   ngOnInit() {
@@ -19,6 +20,10 @@ export class StudentListComponent implements OnInit {
 
   listAllStudents() {
     this.studentOnboardService.getStudents().subscribe(data => this.students = data);
+  }
+
+  delete(id: number) {
+    console.log(id);
   }
 
 }

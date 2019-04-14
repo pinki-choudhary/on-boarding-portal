@@ -10,6 +10,7 @@ import { StudentListComponent } from '../dashboard/student-list/student-list.com
 export const dashboardRoutes: Routes = [
   {path: '', redirectTo: 'onboard', pathMatch: 'full'},
   {path: 'onboard', component: OnBoardFormComponent},
+  {path: 'onboard/:id', component: OnBoardFormComponent},
   {path: 'studentlist', component: StudentListComponent}
 ];
 
