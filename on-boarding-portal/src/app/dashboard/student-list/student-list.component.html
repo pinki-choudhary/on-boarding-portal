@@ -1,7 +1,24 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+      <form [formGroup]="categorySelect">
+      <mat-form-field>
+          <mat-select formControlName="categoryType">
+            <mat-option *ngFor="let category of categories" [value]="categoryFilter">
+              {{category.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <mat-form-field>
+          <input type="text" matInput [(ngModel)]="studentFilter">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <mat-grid-list cols="4" rowHeight="4:4">
-  <mat-grid-tile *ngFor="let student of students">
+  <mat-grid-tile *ngFor="let student of (students | search: studentFilter)">
     <mat-card [appIdentifyStudentType] = student.type>
-      
         <div style="text-align: right"><button mat-button (click)="delete(student.id)"><mat-icon>delete_forever</mat-icon></button></div>
         <mat-card-header [appIdentifyStudentType] = student.type>
             <div mat-card-avatar class="example-header-image"></div>

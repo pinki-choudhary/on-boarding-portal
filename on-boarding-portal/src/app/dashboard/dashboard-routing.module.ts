@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
 import { CustomMaterialModule} from '../shared/custom-material/custom-material.module';
@@ -18,11 +19,15 @@ export const dashboardRoutes: Routes = [
   declarations: [OnBoardFormComponent, StudentListComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     CustomMaterialModule
   ],
   exports: [
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     CustomMaterialModule
   ]
 })

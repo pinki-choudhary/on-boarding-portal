@@ -8,11 +8,12 @@ import {MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule, MatI
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IdentifyStudentTypeDirective } from './identify-student-type.directive';
+import { SearchPipe } from './search.pipe';
+
 
 
 @NgModule({
-  declarations: [
-    IdentifyStudentTypeDirective],
+  declarations: [IdentifyStudentTypeDirective, SearchPipe],
   imports: [
     CommonModule,
     BrowserModule,
@@ -57,7 +58,8 @@ import { IdentifyStudentTypeDirective } from './identify-student-type.directive'
     MatGridListModule,
     MatExpansionModule,
     MatDividerModule,
-    IdentifyStudentTypeDirective
+    IdentifyStudentTypeDirective,
+    SearchPipe
   ]
 })
 export class CustomMaterialModule { }
