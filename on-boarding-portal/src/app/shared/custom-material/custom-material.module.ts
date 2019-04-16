@@ -9,11 +9,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IdentifyStudentTypeDirective } from './identify-student-type.directive';
 import { SearchPipe } from './search.pipe';
+import { CategoryWiseStudentPipe } from './category-wise-student.pipe';
 
 
 
 @NgModule({
-  declarations: [IdentifyStudentTypeDirective, SearchPipe],
+  declarations: [IdentifyStudentTypeDirective, SearchPipe, CategoryWiseStudentPipe],
   imports: [
     CommonModule,
     BrowserModule,
@@ -59,7 +60,8 @@ import { SearchPipe } from './search.pipe';
     MatExpansionModule,
     MatDividerModule,
     IdentifyStudentTypeDirective,
-    SearchPipe
+    SearchPipe,
+    CategoryWiseStudentPipe
   ]
 })
 export class CustomMaterialModule { }

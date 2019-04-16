@@ -6,7 +6,6 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './core/approuting/approuting.module';
 
-
 @NgModule({
   declarations: [
     AppComponent
