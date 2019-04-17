@@ -1,14 +1,14 @@
-import { DocumentList } from './DocumentList';
+import { IDocumentList } from './IDocumentList';
 
 export interface IStudent {
     id?: number;
     name: string;
-    type: string;
-    documentList: DocumentList[];
-    mother_name: string;
-    father_name: string;
-    last_class_score: number;
-    dob: string;
+    category: string;
+    documentList: IDocumentList[];
+    motherName: string;
+    fatherName: string;
+    lastScore: number;
+    dob: Date;
 }
 
 

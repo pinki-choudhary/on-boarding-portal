@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
-import { CustomMaterialModule} from '../shared/custom-material/custom-material.module';
+import { SharedMaterialModule } from '../shared/shared-material.module';
 
 import { OnBoardFormComponent } from '../dashboard/on-board-form/on-board-form.component';
 import { StudentListComponent } from '../dashboard/student-list/student-list.component';
@@ -11,8 +11,7 @@ import { StudentListComponent } from '../dashboard/student-list/student-list.com
 export const dashboardRoutes: Routes = [
   {path: '', redirectTo: 'onboard', pathMatch: 'full'},
   {path: 'onboard', component: OnBoardFormComponent},
-  {path: 'onboard/view/:id', component: OnBoardFormComponent},
-  {path: 'onboard/edit/:id', component: OnBoardFormComponent},
+  {path: 'onboard/:actionType/:id', component: OnBoardFormComponent},
   {path: 'studentlist', component: StudentListComponent}
 ];
 
@@ -23,13 +22,13 @@ export const dashboardRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    CustomMaterialModule
+    SharedMaterialModule
   ],
   exports: [
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomMaterialModule
+    SharedMaterialModule
   ]
 })
 export class DashBoardRoutingModule { }

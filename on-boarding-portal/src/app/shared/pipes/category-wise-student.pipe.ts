@@ -10,7 +10,7 @@ export class CategoryWiseStudentPipe implements PipeTransform {
     if (!students || !categorySelected || categorySelected === 'All') {
       return students;
     }
-    return students.filter(student => student.type.toLocaleLowerCase().includes(categorySelected.toLocaleLowerCase()));
+    return students.filter(student => student.category.toLocaleLowerCase().includes(categorySelected.toLocaleLowerCase()));
   }
 
 }
