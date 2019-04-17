@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
-import { CustomMaterialModule } from '../custom-material/custom-material.module';
+import { SharedMaterialModule } from '../shared-material.module';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
   imports: [
     CommonModule,
-    CustomMaterialModule
+    SharedMaterialModule
   ],
   exports: [
     PageNotFoundComponent,
-    CustomMaterialModule
+    SharedMaterialModule
   ]
 })
 export class PageNotFoundModule { }

@@ -3,13 +3,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule,
   MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatGridListModule, MatExpansionModule,
-  MatDividerModule } from '@angular/material';
+  MatDividerModule, MatSlideToggleModule } from '@angular/material';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IdentifyStudentTypeDirective } from './identify-student-type.directive';
-import { SearchPipe } from './search.pipe';
-import { CategoryWiseStudentPipe } from './category-wise-student.pipe';
+import { IdentifyStudentTypeDirective } from './directives/identify-student-type.directive';
+import { SearchPipe } from './pipes/search.pipe';
+import { CategoryWiseStudentPipe } from './pipes/category-wise-student.pipe';
 
 
 
@@ -36,7 +36,8 @@ import { CategoryWiseStudentPipe } from './category-wise-student.pipe';
     MatNativeDateModule,
     MatGridListModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSlideToggleModule
   ],
   exports: [
     BrowserModule,
@@ -60,8 +61,9 @@ import { CategoryWiseStudentPipe } from './category-wise-student.pipe';
     MatExpansionModule,
     MatDividerModule,
     IdentifyStudentTypeDirective,
+    MatSlideToggleModule,
     SearchPipe,
     CategoryWiseStudentPipe
   ]
 })
-export class CustomMaterialModule { }
+export class SharedMaterialModule { }

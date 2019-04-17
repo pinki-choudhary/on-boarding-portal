@@ -8,6 +8,7 @@ import { IUser } from '../../shared/interfaces/IUser';
 })
 export class InMemoryLoginDataService implements InMemoryDbService {
   createDb() {
+
     const login: IUser[] = [
       { id: 11, username: 'Admin', password: 'admin' },
       { id: 12, username: 'Pinki', password: 'pinki' },
@@ -15,52 +16,76 @@ export class InMemoryLoginDataService implements InMemoryDbService {
     ];
 
     const students: IStudent[] = [
-      { id: 1, name: 'Mark', type: 'International',
-        documentList: [ {name: 'domicile', isMandatory: true, isSubmitted: true},
-                        {name: 'birth_certificate', isMandatory: true, isSubmitted: true},
-                        {name: 'marksheets', isMandatory: true, isSubmitted: true},
-                        {name: 'police_clearance', isMandatory: true, isSubmitted: true},
-                        {name: 'passport', isMandatory: true, isSubmitted: true},
-                        {name: 'declaration', isMandatory: true, isSubmitted: true}],
-        mother_name: 'Mary', father_name: 'William', last_class_score: 67, dob: '08/12/1997' },
+      { id: 1, name: 'Mark', category: 'International',
+        documentList: [ {category: 'International', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                        {category: 'International', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                        {category: 'International', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                        {category: 'International', name: 'Police Clearance', isMandatory: true, isSubmitted: true},
+                        {category: 'International', name: 'Passport', isMandatory: true, isSubmitted: true},
+                        {category: 'International', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+        motherName: 'Mary', fatherName: 'William', lastScore: 67, dob: new Date('08/12/1997') },
 
-      { id: 2, name: 'Rohan Yadav', type: 'Domestic',
-        documentList: [ {name: 'domicile', isMandatory: true, isSubmitted: true},
-                        {name: 'birth_certificate', isMandatory: true, isSubmitted: true},
-                        {name: 'marksheets', isMandatory: true, isSubmitted: true},
-                        {name: 'police_clearance', isMandatory: false, isSubmitted: true},
-                        {name: 'passport', isMandatory: false, isSubmitted: true},
-                        {name: 'declaration', isMandatory: true, isSubmitted: true}],
-        mother_name: 'Meera Yadav', father_name: 'Rajeev Yadav', last_class_score: 76, dob: '06/03/1998' },
+      { id: 2, name: 'Rohan Yadav', category: 'Domestic',
+        documentList: [ {category: 'Domestic', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                        {category: 'Domestic', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                        {category: 'Domestic', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                        {category: 'Domestic', name: 'Police Clearance', isMandatory: false, isSubmitted: true},
+                        {category: 'Domestic', name: 'Passport', isMandatory: false, isSubmitted: true},
+                        {category: 'Domestic', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+        motherName: 'Meera Yadav', fatherName: 'Rajeev Yadav', lastScore: 76, dob: new Date('06/03/1998') },
 
-      { id: 3, name: 'Radhe Mishra', type: 'Domestic',
-      documentList: [ {name: 'domicile', isMandatory: true, isSubmitted: true},
-                      {name: 'birth_certificate', isMandatory: true, isSubmitted: true},
-                      {name: 'marksheets', isMandatory: true, isSubmitted: true},
-                      {name: 'police_clearance', isMandatory: false, isSubmitted: false},
-                      {name: 'passport', isMandatory: false, isSubmitted: true},
-                      {name: 'declaration', isMandatory: true, isSubmitted: true}],
-      mother_name: 'Rama Mishra', father_name: 'Pawan Mishra', last_class_score: 91, dob: '08/12/1995' },
+      { id: 3, name: 'Radhe Mishra', category: 'Domestic',
+      documentList: [ {category: 'Domestic', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Police Clearance', isMandatory: false, isSubmitted: false},
+                      {category: 'Domestic', name: 'Passport', isMandatory: false, isSubmitted: true},
+                      {category: 'Domestic', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+      motherName: 'Rama Mishra', fatherName: 'Pawan Mishra', lastScore: 91, dob: new Date('08/12/1995') },
 
-      { id: 4, name: 'Joe', type: 'International',
-      documentList: [ {name: 'domicile', isMandatory: true, isSubmitted: true},
-                      {name: 'birth_certificate', isMandatory: true, isSubmitted: true},
-                      {name: 'marksheets', isMandatory: true, isSubmitted: true},
-                      {name: 'police_clearance', isMandatory: true, isSubmitted: true},
-                      {name: 'passport', isMandatory: true, isSubmitted: true},
-                      {name: 'declaration', isMandatory: true, isSubmitted: true}],
-      mother_name: 'Janny', father_name: 'Will Smith', last_class_score: 90, dob: '08/08/1996' },
+      { id: 4, name: 'Joe', category: 'International',
+      documentList: [ {category: 'International', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                      {category: 'International', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                      {category: 'International', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                      {category: 'International', name: 'Police Clearance', isMandatory: true, isSubmitted: true},
+                      {category: 'International', name: 'Passport', isMandatory: true, isSubmitted: true},
+                      {category: 'International', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+      motherName: 'Janny', fatherName: 'Will Smith', lastScore: 90, dob: new Date('08/08/1996') },
 
-      { id: 5, name: 'Seeta', type: 'Domestic',
-      documentList: [ {name: 'domicile', isMandatory: true, isSubmitted: true},
-                      {name: 'birth_certificate', isMandatory: true, isSubmitted: true},
-                      {name: 'marksheets', isMandatory: true, isSubmitted: true},
-                      {name: 'police_clearance', isMandatory: false, isSubmitted: false},
-                      {name: 'passport', isMandatory: false, isSubmitted: false},
-                      {name: 'declaration', isMandatory: true, isSubmitted: true}],
-      mother_name: 'Parmila', father_name: 'Vimal', last_class_score: 97, dob: '06/11/1996' },
+      { id: 5, name: 'Seeta', category: 'Domestic',
+      documentList: [ {category: 'Domestic', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Police Clearance', isMandatory: false, isSubmitted: false},
+                      {category: 'Domestic', name: 'Passport', isMandatory: false, isSubmitted: false},
+                      {category: 'Domestic', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+      motherName: 'Parmila', fatherName: 'Vimal', lastScore: 97, dob: new Date('06/11/1996') },
+
+      { id: 6, name: 'Geeta', category: 'Domestic',
+      documentList: [ {category: 'Domestic', name: 'Domicile', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Birth Certificate', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Marksheets', isMandatory: true, isSubmitted: true},
+                      {category: 'Domestic', name: 'Police Clearance', isMandatory: false, isSubmitted: false},
+                      {category: 'Domestic', name: 'Passport', isMandatory: false, isSubmitted: false},
+                      {category: 'Domestic', name: 'Declaration', isMandatory: true, isSubmitted: true}],
+      motherName: 'Pari', fatherName: 'Virendra', lastScore: 87, dob: new Date('06/01/1996') },
     ];
-    return {login, students};
+
+    const documentlist = [{id: 1, category: 'International', name: 'Domicile', isMandatory: true, isSubmitted: false},
+                          {id: 2, category: 'International', name: 'Birth Certificate', isMandatory: true, isSubmitted: false},
+                          {id: 3, category: 'International', name: 'Marksheets', isMandatory: true, isSubmitted: false},
+                          {id: 4, category: 'International', name: 'Police Clearance', isMandatory: true, isSubmitted: false},
+                          {id: 5, category: 'International', name: 'Passport', isMandatory: true, isSubmitted: false},
+                          {id: 6, category: 'International', name: 'Declaration', isMandatory: true, isSubmitted: false},
+
+                          {id: 7, category: 'Domestic', name: 'Domicile', isMandatory: true, isSubmitted: false},
+                          {id: 8, category: 'Domestic', name: 'Birth Certificate', isMandatory: true, isSubmitted: false},
+                          {id: 9, category: 'Domestic', name: 'Marksheets', isMandatory: true, isSubmitted: false},
+                          {id: 10, category: 'Domestic', name: 'Police Clearance', isMandatory: false, isSubmitted: false},
+                          {id: 11, category: 'Domestic', name: 'Passport', isMandatory: false, isSubmitted: false},
+                          {id: 12, category: 'Domestic', name: 'Declaration', isMandatory: true, isSubmitted: false}];
+
+    return {login, students, documentlist};
   }
 
   genId(students: IStudent[]): number {

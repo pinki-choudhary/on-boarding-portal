@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { CustomMaterialModule } from '../shared/custom-material/custom-material.module';
+import { SharedMaterialModule } from '../shared/shared-material.module';
 import { InMemoryLoginDataService } from '../core/services/in-memory-login-data.service';
 import { PortalHeaderComponent} from '../shared/portal-header/portal-header.component';
 
@@ -19,14 +19,14 @@ import { PortalHeaderComponent} from '../shared/portal-header/portal-header.comp
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryLoginDataService, { dataEncapsulation: false }
     ),
-    CustomMaterialModule
+    SharedMaterialModule
   ],
   exports: [
     ReactiveFormsModule,
     FormsModule,
     PortalHeaderComponent,
     AdminLoginComponent,
-    CustomMaterialModule
+    SharedMaterialModule
   ]
 })
 export class LoginModule { }

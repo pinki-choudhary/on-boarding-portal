@@ -8,19 +8,18 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   navLinks: any[];
   constructor(private router: Router) {
-    this.navLinks = [
-        {
-            label: 'On Board',
-            link: 'onboard',
-            index: 0
-        }, {
-            label: 'Student List',
-            link: 'studentlist',
-            index: 1
-        }
-    ];
 }
-ngOnInit() {
-  }
-
+  ngOnInit() {
+    this.navLinks = [
+      {
+          label: 'On Board',
+          link: 'onboard',
+          index: 0
+      }, {
+          label: 'Student List',
+          link: 'studentlist',
+          index: 1
+      }
+  ];
+    }
 }
