@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IStudent } from '../../shared/interfaces/IStudent';
 import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +30,18 @@ export class StudentOnboardService {
   /** ADD student. */
   addStudent(student: IStudent): Observable<IStudent> {
     console.log(student);
-    return this.http.post<IStudent>(this.studentUrl, student);
+    return this.http.post<IStudent>(this.studentUrl, student, httpOptions);
   }
 
   /** UPDATE existing student. */
   updateStudent(student: IStudent): Observable<IStudent> {
-    return this.http.put<IStudent>(this.studentUrl, student);
+    return this.http.put<IStudent>(this.studentUrl, student, httpOptions);
   }
 
   /** DELETE a student. */
   deleteStudent(id: number): Observable<IStudent> {
     const url = `${this.studentUrl}/${id}`;
-    console.log(url);
-    return this.http.delete<IStudent>(url);
+    return this.http.delete<IStudent>(url, httpOptions);
   }
 
 }
