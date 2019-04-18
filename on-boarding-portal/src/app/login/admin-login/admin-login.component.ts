@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControlName, Validators, NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginService } from '../../core/services/login.service';
@@ -12,7 +12,6 @@ import { IUser } from '../../shared/interfaces/IUser';
 export class AdminLoginComponent implements OnInit {
 
   loginForm: FormGroup;
-
   constructor(private fb: FormBuilder, private route: Router, private loginService: LoginService ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -28,6 +27,9 @@ export class AdminLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('TOKEN')) {
+      localStorage.clear();
+    }
   }
 
   login(myform: IUser) {

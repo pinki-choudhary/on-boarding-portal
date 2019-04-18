@@ -29,6 +29,15 @@ export class OnBoardFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.actionToPerform = this.acivatedRoute.snapshot.params.actionType;
+    this.currentItemId = this.acivatedRoute.snapshot.params.id;
+
+    if (this.currentItemId) {
+      this.studentOnboardService.getStudent(this.currentItemId).subscribe(data =>  {
+        this.initializeFormWithValues(data);
+      });
+    }
+
     this.onBoardForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(30)]],
       category: ['Domestic', Validators.required],
@@ -40,12 +49,32 @@ export class OnBoardFormComponent implements OnInit {
     });
 
     this.documentService.getDocumentList().subscribe(data => {
-        this.documents = data;
-        this.setDocumentList();
-      });
+      this.documents = data;
+      this.setDocumentList();
+      if (this.actionToPerform === 'view') {
+        this.onBoardForm.disable();
+      }
+  });
+  }
 
-    this.actionToPerform = this.acivatedRoute.snapshot.params.actionType;
-    this.currentItemId = this.acivatedRoute.snapshot.params.id;
+  initializeFormWithValues(student: IStudent) {
+    this.student = student;
+    this.onBoardForm = this.fb.group({
+      id: [student.id, [ Validators.required]],
+      name: [student.name, [Validators.required, Validators.maxLength(30)]],
+      category: [student.category, Validators.required],
+      documentList: this.fb.array([]),
+      dob: [student.dob, Validators.required],
+      motherName: [student.motherName, Validators.required],
+      fatherName: [student.fatherName, Validators.required],
+      lastScore: [student.lastScore, Validators.required]
+    });
+    this.documentService.getDocumentList().subscribe(data => {
+          this.documents = data;
+          if (this.actionToPerform === 'view') {
+            this.onBoardForm.disable();
+          }
+      });
   }
 
   toggleVisibility(e) {
@@ -63,8 +92,8 @@ export class OnBoardFormComponent implements OnInit {
   setDocumentList() {
     const categoryDocList = this.documents.filter((documents) => documents.category === this.onBoardForm.get('category').value);
     this.categoryWiseDocument =  categoryDocList;
-    categoryDocList.map(doc => this.documentFields.push(this.fb.control(false)));
-    console.log(this.categoryWiseDocument);
+    categoryDocList.map( (doc, index) => this.documentFields.push(
+          this.fb.control(this.student ? this.student.documentList[index].isSubmitted : false)));
   }
 
   getErrorMessage() {
@@ -82,18 +111,20 @@ export class OnBoardFormComponent implements OnInit {
 
   onBoardStudent(onboardFormValue) {
     const currentStudent = onboardFormValue;
-    console.log(onboardFormValue);
     currentStudent.documentList  = currentStudent.documentList.map((document, index) => {
       return {name: this.documents[index].name,
         category: currentStudent.category, isMandatory: this.mandatoryFields, isSubmitted: document } ;
     });
 
-    this.studentOnboardService.addStudent(currentStudent).subscribe();
+    if (this.actionToPerform === 'edit') {
+      this.studentOnboardService.updateStudent(currentStudent).subscribe();
+    } else {
+      this.studentOnboardService.addStudent(currentStudent).subscribe();
+    }
     this.router.navigate(['/dashboard/studentlist']);
   }
 
   resetForm() {
     this.onBoardForm.reset();
   }
-
 }

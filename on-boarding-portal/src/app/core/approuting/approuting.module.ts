@@ -11,12 +11,15 @@ import { AdminLoginComponent } from '../../login/admin-login/admin-login.compone
 import { DashboardComponent } from '../../dashboard/dashboard/dashboard.component';
 
 import { PageNotFoundComponent } from '../../shared/pagenotfound/page-not-found/page-not-found.component';
+import { DashboardCanActivateGuard } from '../../login/dashboard-can-activate.guard';
+import { LoginCanActivateGuard } from '../../dashboard/login-can-activate.guard';
+
 
 
 const routes: Routes = [
-  {path: '', component: AdminLoginComponent, pathMatch: 'full'},
-  {path: 'login', component: AdminLoginComponent},
-  {path: 'dashboard', component: DashboardComponent, children: [...dashboardRoutes]},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: AdminLoginComponent, canActivate: [LoginCanActivateGuard]},
+  {path: 'dashboard', component: DashboardComponent, children: [...dashboardRoutes], canActivate: [DashboardCanActivateGuard]},
   {path: '**', component: PageNotFoundComponent, pathMatch: 'full'}
 ];
 
