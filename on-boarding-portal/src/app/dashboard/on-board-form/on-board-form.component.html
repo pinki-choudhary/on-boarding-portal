@@ -1,18 +1,18 @@
 <mat-card>
 <mat-card-title>On Board Student Form</mat-card-title>
 <mat-label class="note">*Fields marked with <mat-icon class="small-icon">grade</mat-icon> are mandatory as per student category.</mat-label>
-<form class="form-container" [formGroup]="onBoardForm" (ngSubmit)="onBoardStudent(onBoardForm.value)">
+<form class="form-container" [formGroup]="onBoardForm" (ngSubmit)="setOnBoardStudent(onBoardForm.value)">
   <!-- {{onBoardForm.value | json}} -->
     <mat-form-field class="form-fields-full-width">
       <input matInput placeholder="Full Name" formControlName="name">
-      <mat-error *ngIf="onBoardForm.get('name').invalid">{{getErrorMessage()}}</mat-error>
+      <mat-error *ngIf="onBoardForm.get('name').hasError('required')">Name cannot be blank.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
-        <mat-select formControlName="category" (selectionChange)="toggleVisibility($event)">
+        <mat-select formControlName="category" (selectionChange)="toggleMandatoryDocVisibility($event)">
             <mat-option value="Domestic">Domestic</mat-option>
             <mat-option value="International">International</mat-option>
         </mat-select>
-        <mat-error *ngIf="onBoardForm.get('category').invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="onBoardForm.get('category').hasError('required')">Please select student category.</mat-error>
     </mat-form-field>
 <!-- enter docuemnt list here -->
 <table>
@@ -28,19 +28,20 @@
       <input matInput [matDatepicker]="picker" placeholder="Date of Birth (M/D/YYYY)" formControlName="dob">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="onBoardForm.get('dob').invalid">{{getErrorMessage()}}</mat-error>
+      <mat-error *ngIf="onBoardForm.get('dob').hasError('required')">Please provide DOB.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
       <input matInput placeholder="Mother's Name" formControlName="motherName">
-      <mat-error *ngIf="onBoardForm.get('motherName').invalid">{{getErrorMessage()}}</mat-error>
+      <mat-error *ngIf="onBoardForm.get('motherName').hasError('required')">Mother's name cannot be blank.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
         <input matInput placeholder="Father's Name" formControlName="fatherName">
-        <mat-error *ngIf="onBoardForm.get('fatherName').invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="onBoardForm.get('fatherName').hasError('required')">Father's name cannot be blank.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
         <input matInput placeholder="% Marks" formControlName="lastScore">
-        <mat-error *ngIf="onBoardForm.get('lastScore').invalid">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="onBoardForm.get('lastScore').hasError('required')">Please enter your marks.</mat-error>
+        <mat-error *ngIf="onBoardForm.get('lastScore').hasError('pattern')">Marks should be numeric.</mat-error>
     </mat-form-field>
     <mat-card-actions>
         <button type="submit" mat-raised-button color="primary" [disabled]="!onBoardForm.valid">On Board Student</button>

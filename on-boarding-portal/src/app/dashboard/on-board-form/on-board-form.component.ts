@@ -4,7 +4,7 @@ import { IDocumentList } from '../../shared/interfaces/IDocumentList';
 import { StudentOnboardService } from '../../core/services/student-onboard.service';
 import { DocumentListService } from '../../core/services/document-list.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IStudent } from 'src/app/shared/interfaces/IStudent';
+import { IStudent } from '../../shared/interfaces/IStudent';
 
 @Component({
   selector: 'app-on-board-form',
@@ -39,13 +39,13 @@ export class OnBoardFormComponent implements OnInit {
     }
 
     this.onBoardForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(30)]],
+      name: ['', Validators.required],
       category: ['Domestic', Validators.required],
       documentList: this.fb.array([]),
       dob: ['', Validators.required],
       motherName: ['', Validators.required],
       fatherName: ['', Validators.required],
-      lastScore: ['', Validators.required]
+      lastScore: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     });
 
     this.documentService.getDocumentList().subscribe(data => {
@@ -60,14 +60,14 @@ export class OnBoardFormComponent implements OnInit {
   initializeFormWithValues(student: IStudent) {
     this.student = student;
     this.onBoardForm = this.fb.group({
-      id: [student.id, [ Validators.required]],
-      name: [student.name, [Validators.required, Validators.maxLength(30)]],
+      id: [student.id, Validators.required],
+      name: [student.name, Validators.required],
       category: [student.category, Validators.required],
       documentList: this.fb.array([]),
       dob: [student.dob, Validators.required],
       motherName: [student.motherName, Validators.required],
       fatherName: [student.fatherName, Validators.required],
-      lastScore: [student.lastScore, Validators.required]
+      lastScore: [student.lastScore, [Validators.required, Validators.pattern('[0-9]*')]]
     });
     this.documentService.getDocumentList().subscribe(data => {
           this.documents = data;
@@ -77,9 +77,11 @@ export class OnBoardFormComponent implements OnInit {
       });
   }
 
-  toggleVisibility(e) {
+  toggleMandatoryDocVisibility(e) {
     if (e.value === 'International') {
+      console.log('Manadatory fields are: ');
       this.mandatoryFields = true;
+      console.log(this.mandatoryFields);
     } else {
       this.mandatoryFields = false;
     }
@@ -96,29 +98,33 @@ export class OnBoardFormComponent implements OnInit {
           this.fb.control(this.student ? this.student.documentList[index].isSubmitted : false)));
   }
 
-  getErrorMessage() {
-    let inputErrorMessage = '';
-
-    if (this.onBoardForm.get('name').hasError('required') || this.onBoardForm.get('category').hasError('required')
-        || this.onBoardForm.get('dob').hasError('required') || this.onBoardForm.get('motherName').hasError('required')
-        || this.onBoardForm.get('fatherName').hasError('required') || this.onBoardForm.get('lastScore').hasError('required')) {
-
-      inputErrorMessage = 'Field must have some value';
-    }
-
-    return inputErrorMessage;
-  }
-
-  onBoardStudent(onboardFormValue) {
+  setOnBoardStudent(onboardFormValue) {
     const currentStudent = onboardFormValue;
+    let addIsMandatory = true;
     currentStudent.documentList  = currentStudent.documentList.map((document, index) => {
+      if (onboardFormValue.category.toLocaleLowerCase() === 'domestic' &&
+            (this.documents[index].name.toLocaleLowerCase() === 'police clearance' ||
+              this.documents[index].name.toLocaleLowerCase() === 'passport')) {
+                  addIsMandatory = false;
+              } else {
+                addIsMandatory = true;
+              }
       return {name: this.documents[index].name,
-        category: currentStudent.category, isMandatory: this.mandatoryFields, isSubmitted: document } ;
+        category: currentStudent.category, isMandatory: addIsMandatory, isSubmitted: document } ;
     });
 
+    this.onBoard(currentStudent);
+  }
+
+  onBoard(currentStudent: IStudent) {
+    console.log(currentStudent);
     if (this.actionToPerform === 'edit') {
+      console.log('updating student');
+      console.log(currentStudent);
       this.studentOnboardService.updateStudent(currentStudent).subscribe();
     } else {
+      console.log('adding student');
+      console.log(currentStudent);
       this.studentOnboardService.addStudent(currentStudent).subscribe();
     }
     this.router.navigate(['/dashboard/studentlist']);
@@ -127,4 +133,5 @@ export class OnBoardFormComponent implements OnInit {
   resetForm() {
     this.onBoardForm.reset();
   }
+
 }
