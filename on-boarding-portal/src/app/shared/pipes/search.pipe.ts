@@ -4,6 +4,10 @@ import { IStudent } from '../interfaces/IStudent';
 @Pipe({
   name: 'search'
 })
+
+/**
+ * Pipe used for searching students by their names.
+ */
 export class SearchPipe implements PipeTransform {
 
   transform(students: IStudent[], searchName: string): IStudent[] {

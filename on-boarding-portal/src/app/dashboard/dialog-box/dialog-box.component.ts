@@ -6,6 +6,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.css']
 })
+
+/** This is a Dialog box class. */
 export class DialogBoxComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>,
@@ -14,6 +16,7 @@ export class DialogBoxComponent implements OnInit {
   ngOnInit() {
   }
 
+  /** Closes the dialog box. */
   delete() {
     this.dialogRef.close(true);
   }

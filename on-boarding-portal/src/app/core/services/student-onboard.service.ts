@@ -12,8 +12,10 @@ const httpOptions = {
 })
 export class StudentOnboardService {
 
+  /** Url of student API */
   private studentUrl = 'api/students';
 
+  /** Constructor that injects http client. */
   constructor(private http: HttpClient) { }
 
   /** GET ALL students. */

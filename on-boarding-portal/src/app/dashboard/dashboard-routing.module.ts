@@ -8,6 +8,13 @@ import { SharedMaterialModule } from '../shared/shared-material.module';
 import { OnBoardFormComponent } from '../dashboard/on-board-form/on-board-form.component';
 import { StudentListComponent } from '../dashboard/student-list/student-list.component';
 
+/**
+ * dashboardRoutes constant that holds the array of routes for dashboard.
+ * '' route redirects to onboard page.
+ * onboard page takes user to onboard page.
+ * onboard/actiontype/id allows user to edit or view the student.
+ * studentlist route lists all the student on studnet list page.
+ */
 export const dashboardRoutes: Routes = [
   {path: '', redirectTo: 'onboard', pathMatch: 'full'},
   {path: 'onboard', component: OnBoardFormComponent},
@@ -15,6 +22,10 @@ export const dashboardRoutes: Routes = [
   {path: 'studentlist', component: StudentListComponent}
 ];
 
+/**
+ * NgModule decorator that holds all the imported modules.
+ * It also exports the modules for other modules to use them.
+ */
 @NgModule({
   declarations: [OnBoardFormComponent, StudentListComponent],
   imports: [
@@ -31,4 +42,8 @@ export const dashboardRoutes: Routes = [
     SharedMaterialModule
   ]
 })
+
+/**
+ * This is the class that will be imported wherever needed.
+ */
 export class DashBoardRoutingModule { }
