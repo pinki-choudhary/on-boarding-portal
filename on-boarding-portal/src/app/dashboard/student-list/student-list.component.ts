@@ -18,6 +18,8 @@ export class StudentListComponent implements OnInit {
 
   // variable that holds array of students.
   students: IStudent[];
+  studentFilter: string;
+  categoryFilter = 'All';
 
   /**
    *
