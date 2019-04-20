@@ -6,6 +6,10 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './core/approuting/approuting.module';
 
+/**
+ * NgModule decorator that holds all the imported modules.
+ * It also exports the modules for other modules to use them.
+ */
 @NgModule({
   declarations: [
     AppComponent

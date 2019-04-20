@@ -5,11 +5,19 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
+/** Dashboard component class. */
 export class DashboardComponent implements OnInit {
+
+  /** array of nav bar on dashboard page. */
   navLinks: any[];
+
+  /** Constructor that injects router. */
   constructor(private router: Router) {
 }
   ngOnInit() {
+
+    /** array of nav bar links on component load.  */
     this.navLinks = [
       {
           label: 'On Board',

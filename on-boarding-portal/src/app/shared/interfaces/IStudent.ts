@@ -1,5 +1,6 @@
 import { IDocumentList } from './IDocumentList';
 
+// Interface for student.
 export interface IStudent {
     id?: number;
     name: string;

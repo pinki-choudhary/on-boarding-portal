@@ -15,7 +15,12 @@ import { DashboardCanActivateGuard } from '../../login/dashboard-can-activate.gu
 import { LoginCanActivateGuard } from '../../dashboard/login-can-activate.guard';
 
 
-
+/** Routes constant that contains the routes for the application
+ * '' route redirects to login page.
+ * login route takes user to login page.
+ * dashboard route takes user to dashboard page only when user is logged in.
+ * any other wild card route will lead to an 404 page.
+ */
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: AdminLoginComponent, canActivate: [LoginCanActivateGuard]},
@@ -23,6 +28,10 @@ const routes: Routes = [
   {path: '**', component: PageNotFoundComponent, pathMatch: 'full'}
 ];
 
+/**
+ * This NgModule decorator has the meta data for this routing file.
+ * It also exports the neccessary modules to be used outside this module.
+ */
 @NgModule({
   declarations: [],
   imports: [
@@ -42,4 +51,8 @@ const routes: Routes = [
     PageNotFoundModule
   ]
 })
+
+/**
+ * This is the class that will be imported wherever needed.
+ */
 export class AppRoutingModule { }

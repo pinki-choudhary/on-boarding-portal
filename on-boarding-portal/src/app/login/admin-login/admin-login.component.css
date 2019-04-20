@@ -20,3 +20,14 @@ mat-form-field {
     padding: 25px 25em;
     justify-content: center
 }
+
+p {
+    margin-bottom: 10px; 
+    padding: 5px;
+    width: 50%;
+    background-color: #ffeeee;
+    border: 2px solid red;
+    border-radius: 8px;
+    font-size: 16px;
+    color: red;
+}

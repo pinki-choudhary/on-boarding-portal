@@ -6,15 +6,21 @@ import { IUser } from '../../shared/interfaces/IUser';
 @Injectable({
   providedIn: 'root'
 })
+
+/** This is a class that implements InMemoryDbService.
+ * It contains all the collections required throughout the app.
+ */
 export class InMemoryLoginDataService implements InMemoryDbService {
   createDb() {
 
+    /** Default Login User data collection. */
     const login: IUser[] = [
       { id: 11, username: 'Admin', password: 'admin' },
       { id: 12, username: 'Pinki', password: 'pinki' },
       { id: 13, username: 'Arun', password: 'arun' }
     ];
 
+    /** Default students data collection. */
     const students: IStudent[] = [
       { id: 1, name: 'Mark', category: 'International',
         documentList: [ {category: 'International', name: 'Domicile', isMandatory: true, isSubmitted: true},
@@ -71,6 +77,7 @@ export class InMemoryLoginDataService implements InMemoryDbService {
       motherName: 'Pari', fatherName: 'Virendra', lastScore: 87, dob: new Date('06/01/1996') },
     ];
 
+    /** Default document list data colletcion. */
     const documentlist = [{id: 1, category: 'International', name: 'Domicile', isMandatory: true, isSubmitted: false},
                           {id: 2, category: 'International', name: 'Birth Certificate', isMandatory: true, isSubmitted: false},
                           {id: 3, category: 'International', name: 'Marksheets', isMandatory: true, isSubmitted: false},
@@ -88,6 +95,7 @@ export class InMemoryLoginDataService implements InMemoryDbService {
     return {login, students, documentlist};
   }
 
+/** Method that generates the ids of student when not passed. */
   genId(students: IStudent[]): number {
     return students.length > 0 ? Math.max(...students.map(student => student.id)) + 1 : 1;
   }
