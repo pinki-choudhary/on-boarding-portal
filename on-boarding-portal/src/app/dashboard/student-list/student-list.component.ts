@@ -19,6 +19,12 @@ export class StudentListComponent implements OnInit {
   // variable that holds array of students.
   students: IStudent[];
 
+  // variable that takes the student name from the search bar.
+  studentFilter: string;
+
+  // variable that holds the category selected for filtering student.
+  categoryFilter = 'All';
+
   /**
    *
    * @param studentOnboardService : StudentOnboardService
