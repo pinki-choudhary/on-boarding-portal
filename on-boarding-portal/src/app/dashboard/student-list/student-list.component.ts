@@ -50,7 +50,7 @@ export class StudentListComponent implements OnInit {
   }
 
   /**
-   * This method opens the confirmation dialog when deleting a student.
+   * Confirmation dialog for before deleting a student.
    * @param id : number
    */
   openDialog(id: number): void {
