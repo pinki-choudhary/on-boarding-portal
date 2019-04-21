@@ -61,7 +61,12 @@ export class OnBoardFormComponent implements OnInit {
 
     if (this.currentStuId) {
       this.studentOnboardService.getStudent(this.currentStuId).subscribe(data =>  {
-        this.initializeFormWithValues(data);
+        if(data === null) {
+          this.router.navigate(['/page not found']);
+          this.toastrService.warning('No such student found!', 'On Boarding Portal');
+        } else {
+          this.initializeFormWithValues(data);
+      }
       });
     }
 
