@@ -18,3 +18,8 @@
     margin-bottom: 1em;
     border-bottom: 3px solid #ff4081;
   }
+
+  .note {
+    color: red;
+    margin-bottom: 5px;
+  }

@@ -31,7 +31,6 @@ export class StudentOnboardService {
 
   /** ADD student. */
   addStudent(student: IStudent): Observable<IStudent> {
-    console.log(student);
     return this.http.post<IStudent>(this.studentUrl, student, httpOptions);
   }
 

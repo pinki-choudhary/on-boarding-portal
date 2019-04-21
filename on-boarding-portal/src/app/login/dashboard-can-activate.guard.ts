@@ -15,7 +15,6 @@ export class DashboardCanActivateGuard implements CanActivate {
 
   // method that guards the dashboard when user is not logged in.
   canActivate(): boolean {
-    console.log(localStorage.getItem('TOKEN'));
     if (localStorage.getItem('TOKEN') === null || localStorage.getItem('TOKEN') === undefined) {
       this.router.navigate(['/login']);
       this.toastrService.warning('Please login to continue!', 'On Boarding Portal');
