@@ -3,9 +3,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatToolbarModule,
-        MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatGridListModule,
-        MatDividerModule } from '@angular/material';
+import {MatCheckboxModule, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
+        MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule,
+        MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatGridListModule, MatExpansionModule,
+        MatDividerModule, MatSlideToggleModule } from '@angular/material';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -15,54 +16,64 @@ import { IdentifyStudentTypeDirective } from './directives/identify-student-type
 import { SearchPipe } from './pipes/search.pipe';
 import { CategoryWiseStudentPipe } from './pipes/category-wise-student.pipe';
 import { PortalFooterComponent } from './portal-footer/portal-footer.component';
-import { PortalHeaderComponent } from './portal-header/portal-header.component';
 
 /**
  * NgModule decorator that holds all the imported modules.
  * It also exports the modules for other modules to use them.
  */
 @NgModule({
-  declarations: [IdentifyStudentTypeDirective, SearchPipe, CategoryWiseStudentPipe, PortalFooterComponent, PortalHeaderComponent],
+  declarations: [IdentifyStudentTypeDirective, SearchPipe, CategoryWiseStudentPipe, PortalFooterComponent],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
     MatInputModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatMenuModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule,
+    MatExpansionModule,
     MatDividerModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot()
   ],
   exports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
     MatInputModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatMenuModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule,
+    MatExpansionModule,
     MatDividerModule,
     IdentifyStudentTypeDirective,
+    MatSlideToggleModule,
     ToastrModule,
     SearchPipe,
     CategoryWiseStudentPipe,
-    PortalHeaderComponent,
     PortalFooterComponent
   ]
 })
