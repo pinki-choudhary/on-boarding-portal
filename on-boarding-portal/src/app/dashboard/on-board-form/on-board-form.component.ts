@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { IDocumentList } from '../../shared/interfaces/IDocumentList';
 import { StudentOnboardService } from '../../core/services/student-onboard.service';
 import { DocumentListService } from '../../core/services/document-list.service';
@@ -68,7 +68,7 @@ export class OnBoardFormComponent implements OnInit {
     this.onBoardForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       category: ['Domestic', Validators.required],
-      documentList: this.fb.array([]),
+      documentList: this.fb.array([], this.mandatoryCheckboxesSelected()),
       dob: ['', Validators.required],
       motherName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       fatherName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
@@ -94,7 +94,7 @@ export class OnBoardFormComponent implements OnInit {
       id: [student.id, Validators.required],
       name: [student.name, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       category: [student.category, Validators.required],
-      documentList: this.fb.array([]),
+      documentList: this.fb.array([], this.mandatoryCheckboxesSelected()),
       dob: [student.dob, Validators.required],
       motherName: [student.motherName, Validators.required],
       fatherName: [student.fatherName, Validators.required],
@@ -114,10 +114,10 @@ export class OnBoardFormComponent implements OnInit {
    * @param e : Event
    */
   toggleMandatoryDocVisibility(e) {
+    const categoryDocList = this.documents.filter((documents) => documents.category === this.onBoardForm.get('category').value);
+    this.categoryWiseDocument =  categoryDocList;
     if (e.value === 'International') {
-      console.log('Manadatory fields are: ');
       this.mandatoryFields = true;
-      console.log(this.mandatoryFields);
     } else {
       this.mandatoryFields = false;
     }
@@ -136,6 +136,25 @@ export class OnBoardFormComponent implements OnInit {
     this.categoryWiseDocument =  categoryDocList;
     categoryDocList.map( (doc, index) => this.documentFields.push(
           this.fb.control(this.student ? this.student.documentList[index].isSubmitted : false)));
+  }
+
+  /**
+   * This is a validator that checks all mandatoy checkboxes are checked by user.
+   */
+  mandatoryCheckboxesSelected() {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      if (this.categoryWiseDocument && this.categoryWiseDocument.length > 0) {
+        const mandatoryFieldsNotSelected = this.categoryWiseDocument.filter((document, index) => {
+            if (document.isMandatory) {
+              return formArray.value[index] !== true;
+            }
+        });
+        if (mandatoryFieldsNotSelected.length > 0) {
+          return {required: true};
+        }
+      }
+    };
+    return validator;
   }
 
   /**
