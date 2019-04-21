@@ -9,13 +9,14 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { SharedMaterialModule } from '../shared/shared-material.module';
 import { InMemoryLoginDataService } from '../core/services/in-memory-login-data.service';
+import { PortalHeaderComponent} from '../shared/portal-header/portal-header.component';
 
 /**
  * NgModule decorator that holds all the imported modules.
  * It also exports the modules for other modules to use them.
  */
 @NgModule({
-  declarations: [AdminLoginComponent],
+  declarations: [AdminLoginComponent, PortalHeaderComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,6 +30,7 @@ import { InMemoryLoginDataService } from '../core/services/in-memory-login-data.
   exports: [
     ReactiveFormsModule,
     FormsModule,
+    PortalHeaderComponent,
     AdminLoginComponent,
     SharedMaterialModule
   ]
