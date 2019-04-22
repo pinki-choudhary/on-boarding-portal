@@ -19,6 +19,8 @@ Navigate to `https://pinki-choudhary.github.io/onboarding-app-nagp-angular7-assi
 4. Login page with valid credentials
 ![](images/login-page-with-valid-credentials.PNG)
 
+5. Dashboard after successful login
+![](images/dashboard-after-successful-login.PNG)
 ## Dashboard Page
 
 When user is logged in successfully it s/he will be taken to the dashboard page which shows the onboarding form by default. And displays the existing onboarded students when Student List tab is selected. 
@@ -36,6 +38,8 @@ Using the onboard form the student can be added, updated, viewed. A common form 
 
 ## Add Student
 On board form helps in adding the student with all valid details. If any of the field is invalid then an error message is displayed under that field and onboard button is also disabled. It also has a reset button that resets the form whenever needed.
+
+![](images/add-student.PNG)
 
 ## Edit Student
 A student can be selected from the student list for updating the details.
