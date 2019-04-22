@@ -82,7 +82,7 @@ export class OnBoardFormComponent implements OnInit {
     this.onBoardForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       category: ['Domestic', Validators.required],
-      documentList: this.fb.array([], this.mandatoryCheckboxesSelected()),
+      documentList: this.fb.array([]),
       dob: ['', Validators.required],
       motherName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       fatherName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
@@ -108,7 +108,7 @@ export class OnBoardFormComponent implements OnInit {
       id: [student.id, Validators.required],
       name: [student.name, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       category: [student.category, Validators.required],
-      documentList: this.fb.array([], this.mandatoryCheckboxesSelected()),
+      documentList: this.fb.array([]),
       dob: [student.dob, Validators.required],
       motherName: [student.motherName, Validators.required],
       fatherName: [student.fatherName, Validators.required],
@@ -121,6 +121,23 @@ export class OnBoardFormComponent implements OnInit {
             this.onBoardForm.disable();
           }
       });
+  }
+
+  /**
+   * Method to check that mandatory checkboxes are checked everytime when a user changes the category of student.
+   */
+  mandatoryCheckboxesValid() {
+    const docsCheckboxes = this.onBoardForm.get('documentList').value;
+    const mandatoryFieldsNotSelected = this.categoryWiseDocument.filter((document, index) => {
+        if (document.isMandatory) {
+          return docsCheckboxes[index] !== true;
+        }
+    });
+    if (mandatoryFieldsNotSelected.length > 0) {
+      this.mandatoryChecboxesValid = false;
+    } else {
+      this.mandatoryChecboxesValid = true;
+    }
   }
 
   /**
@@ -154,25 +171,6 @@ export class OnBoardFormComponent implements OnInit {
   }
 
   /**
-   * This is a validator that checks all mandatoy checkboxes are checked by user.
-   */
-  mandatoryCheckboxesSelected() {
-    const validator: ValidatorFn = (formArray: FormArray) => {
-      if (this.categoryWiseDocument && this.categoryWiseDocument.length > 0) {
-        const mandatoryFieldsNotSelected = this.categoryWiseDocument.filter((document, index) => {
-            if (document.isMandatory) {
-              return formArray.value[index] !== true;
-            }
-        });
-        if (mandatoryFieldsNotSelected.length > 0) {
-          return {required: true};
-        }
-      }
-    };
-    return validator;
-  }
-
-  /**
    * Method that sets the student value to IStudent type from form value.
    * @param onboardFormValue : NgForm
    */
@@ -200,6 +198,7 @@ export class OnBoardFormComponent implements OnInit {
    */
   onBoard(currentStudent: IStudent) {
     this.mandatoryCheckboxesValid();
+    if(this.mandatoryChecboxesValid) {
     if (this.actionToPerform === 'edit') {
       this.studentOnboardService.updateStudent(currentStudent).subscribe();
       this.toastrService.success('Student updated successfully!', 'On Boarding Portal');
@@ -208,7 +207,10 @@ export class OnBoardFormComponent implements OnInit {
       this.studentOnboardService.addStudent(currentStudent).subscribe();
       this.toastrService.success('Student added successfully!', 'On Boarding Portal');
     }
-    this.router.navigate(['/dashboard/studentlist']);
+    this.router.navigate(['/dashboard/studentlist']); 
+  } else {
+    return;
+  }
   }
 
   /**
@@ -217,21 +219,4 @@ export class OnBoardFormComponent implements OnInit {
   resetForm() {
     this.onBoardForm.reset();
   }
-
-  /**
-   * Method to check that mandatory checkboxes are checked everytime when a user changes the category of student.
-   */
-  mandatoryCheckboxesValid() {
-        const docsCheckboxes = this.onBoardForm.get('documentList').value;
-        const mandatoryFieldsNotSelected = this.categoryWiseDocument.filter((document, index) => {
-            if (document.isMandatory) {
-              return docsCheckboxes[index] !== true;
-            }
-        });
-        if (mandatoryFieldsNotSelected.length > 0) {
-          this.mandatoryChecboxesValid = false;
-        } else {
-          this.mandatoryChecboxesValid = true;
-        }
-    }
 }
