@@ -10,7 +10,7 @@
       <mat-error *ngIf="onBoardForm.get('name').hasError('maxlength')">Name cannot be more than 25 characters long.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
-        <mat-select formControlName="category" (selectionChange)="toggleMandatoryDocVisibility($event)">
+        <mat-select formControlName="category" (selectionChange)="toggleMandatoryDocVisibility($event)" placeholder="Category">
             <mat-option value="Domestic">Domestic</mat-option>
             <mat-option value="International">International</mat-option>
         </mat-select>
@@ -24,13 +24,16 @@
         </label></td>
         <td><span *ngIf="categoryWiseDocument[i].isMandatory || mandatoryFields"><mat-icon class="small-icon">grade</mat-icon></span></td>
       </tr>
+      <tr class="form-fields-full-width">
+        <mat-error *ngIf="!mandatoryChecboxesValid && mandatoryFields">Please check all mandatory documents are submitted.</mat-error>
+      </tr>
   </table>
 <!-- document list ends here -->
     <mat-form-field class="form-fields-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="Date of Birth (M/D/YYYY)" formControlName="dob">
+      <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Date of Birth (M/D/YYYY)" formControlName="dob">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="onBoardForm.get('dob').hasError('required')">Please provide DOB in correct format.</mat-error>
+      <mat-error *ngIf="onBoardForm.get('dob').hasError('required') || onBoardForm.get('dob').invalid">DOB cannot be blank and please check it is in correct range.</mat-error>
     </mat-form-field>
     <mat-form-field class="form-fields-full-width">
       <input matInput placeholder="Mother's Name" formControlName="motherName">
@@ -52,8 +55,8 @@
           <mat-error *ngIf="onBoardForm.get('lastScore').hasError('max')">Marks should be less than equal to 100.</mat-error>
     </mat-form-field>
     <mat-card-actions>
-        <button type="submit" mat-raised-button color="accent" [disabled]="!onBoardForm.valid">On Board Student</button>
-        <button type="button" mat-raised-button color="accent" (click)="resetForm()" [disabled]="!onBoardForm.valid">Reset</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="!onBoardForm.valid || !mandatoryChecboxesValid">On Board Student</button>
+        <button type="button" mat-raised-button color="accent" (click)="resetForm()" [disabled]="onBoardForm.disabled">Reset</button>
     </mat-card-actions>
   </form>
 </mat-card>

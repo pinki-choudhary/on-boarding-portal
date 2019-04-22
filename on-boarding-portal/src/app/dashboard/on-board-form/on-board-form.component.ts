@@ -37,6 +37,15 @@ export class OnBoardFormComponent implements OnInit {
   // variable that holds id of current student.
   currentStuId: number;
 
+  // variable for mandatory checkbox when category switched.
+  mandatoryChecboxesValid = true;
+
+  // variable for min DOB date
+  minDate = new Date('1995/01/01');
+
+  // variable for max DOB date.
+  maxDate = new Date('2003/12/31');
+
   /**
    *
    * @param fb : FormBuilder
@@ -61,7 +70,7 @@ export class OnBoardFormComponent implements OnInit {
 
     if (this.currentStuId) {
       this.studentOnboardService.getStudent(this.currentStuId).subscribe(data =>  {
-        if(data === null) {
+        if (data === null) {
           this.router.navigate(['/page not found']);
           this.toastrService.warning('No such student found!', 'On Boarding Portal');
         } else {
@@ -126,6 +135,7 @@ export class OnBoardFormComponent implements OnInit {
     } else {
       this.mandatoryFields = false;
     }
+    this.mandatoryCheckboxesValid();
   }
 
   /**
@@ -189,6 +199,7 @@ export class OnBoardFormComponent implements OnInit {
    * @param currentStudent : IStudent
    */
   onBoard(currentStudent: IStudent) {
+    this.mandatoryCheckboxesValid();
     if (this.actionToPerform === 'edit') {
       this.studentOnboardService.updateStudent(currentStudent).subscribe();
       this.toastrService.success('Student updated successfully!', 'On Boarding Portal');
@@ -207,4 +218,20 @@ export class OnBoardFormComponent implements OnInit {
     this.onBoardForm.reset();
   }
 
+  /**
+   * Method to check that mandatory checkboxes are checked everytime when a user changes the category of student.
+   */
+  mandatoryCheckboxesValid() {
+        const docsCheckboxes = this.onBoardForm.get('documentList').value;
+        const mandatoryFieldsNotSelected = this.categoryWiseDocument.filter((document, index) => {
+            if (document.isMandatory) {
+              return docsCheckboxes[index] !== true;
+            }
+        });
+        if (mandatoryFieldsNotSelected.length > 0) {
+          this.mandatoryChecboxesValid = false;
+        } else {
+          this.mandatoryChecboxesValid = true;
+        }
+    }
 }
