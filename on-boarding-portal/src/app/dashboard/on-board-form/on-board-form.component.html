@@ -20,7 +20,7 @@
 <table>
     <tr *ngFor="let doc of documentFields.controls; let i=index;">
         <td><label>
-          <mat-checkbox [formControl]="doc">{{categoryWiseDocument[i].name}}</mat-checkbox>
+          <mat-checkbox (change)="mandatoryCheckboxesValid()" [formControl]="doc">{{categoryWiseDocument[i].name}}</mat-checkbox>
         </label></td>
         <td><span *ngIf="categoryWiseDocument[i].isMandatory || mandatoryFields"><mat-icon class="small-icon">grade</mat-icon></span></td>
       </tr>
